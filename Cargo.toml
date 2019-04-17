@@ -1,0 +1,19 @@
+[package]
+name = "raffineria-cli"
+version = "0.1.0"
+authors = ["Roman Gafiyatullin <r.gafiyatullin@me.com>"]
+edition = "2018"
+
+[dependencies]
+failure = {version = "0.1.5", features = ["derive"]}
+log = "0.4.6"
+
+futures = "0.1.25"
+tokio = "0.1.18"
+
+maplit = "1.0.1"
+
+raffineria = { git = "https://github.com/raffineria/raffineria.git", tag = "v0.1.0" }
+
+env_logger = "0.6.1"
+

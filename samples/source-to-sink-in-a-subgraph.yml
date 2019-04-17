@@ -1,0 +1,49 @@
+
+vertices:
+  source:
+    run:
+      os_process:
+        cmd: ['target/debug/source-seq']
+        env:
+          RUST_LOG: 'debug'
+          FROM: '10'
+          TO: '20'
+        log:
+          file:
+            path: "run.d/logs/source.log"
+    outlets:
+      - out
+    
+  sink-graph:
+    run:
+      graph:
+        vertices: 
+          sink:
+            run:
+              os_process:
+                cmd: ['target/debug/sink-ignore']
+                env:
+                  RUST_LOG: 'debug'
+                log:
+                  file:
+                    path: 'run.d/logs/sink.log'
+            inlets:
+              - in
+        inlets:
+          - vertex: sink
+            port: in
+    inlets:
+      - in
+    
+edges:
+  - producer:
+      vertex: source
+      port: out
+    consumer:
+      vertex: sink-graph
+      port: in
+    schema:
+      type: int
+
+
+    
